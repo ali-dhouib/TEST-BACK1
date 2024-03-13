@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class CarServices {
@@ -26,4 +28,8 @@ public class CarServices {
     }
 
 
+    public List<Car> getAllCars() {
+        return StreamSupport.stream(carRepository.findAll().spliterator(), false)
+                .collect(Collectors.toList());
+    }
 }
